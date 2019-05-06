@@ -27,6 +27,13 @@ pthread_t* initPthread(ThreadPool* tp, int numOfThreads) {
     return threads;
 }
 
+void freeTasks(ThreadPool* tp) {
+    ThreadTask* task;
+    while ((task = osDequeue(tp->tasksQueue)) != NULL) {
+        free(task);
+    }
+}
+
 /*
  * The function that every thread will run
  * */
@@ -77,7 +84,13 @@ void tpDestroy(ThreadPool* threadPool, int shouldWaitForTasks) {
     threadPool->canInsert = false;
     if (shouldWaitForTasks == 0) {
         threadPool->canRun = 0;
+        freeTasks(threadPool);
     }
+    free(threadPool->sync);
+//     TODO check when the threads end to run.
+//    freeThreads(threadPool);
+//    osDestroyQueue(threadPool->tasksQueue);
+    free(threadPool);
 }
 
 

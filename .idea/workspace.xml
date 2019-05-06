@@ -13,7 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8315134f-e859-4f10-9a7b-92fb25282f29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/threadPool.c" beforeDir="false" afterPath="$PROJECT_DIR$/threadPool.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threadPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/threadPool.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,7 +44,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/osqueue.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="835">
+            <state relative-caret-position="836">
               <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
             </state>
           </provider>
@@ -78,14 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/threadPool.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#2#0" />
-                <element signature="e#141#149#0" />
-                <element signature="e#187#443#0" />
-                <element signature="e#515#800#0" />
-              </folding>
+            <state relative-caret-position="470">
+              <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -174,7 +167,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556891618982</updated>
-      <workItem from="1556891622213" duration="16607000" />
+      <workItem from="1556891622213" duration="18062000" />
     </task>
     <task id="LOCAL-00001" summary="tpCreate">
       <created>1557150734343</created>
@@ -187,10 +180,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16607000" />
+    <option name="totallyTimeSpent" value="18062000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="3133" height="1775" extended-state="6" />
+    <frame x="67" y="25" width="3133" height="1582" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -200,7 +193,7 @@
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Messages" weight="0.32976714" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32976714" />
+      <window_info anchor="bottom" id="Terminal" weight="0.37535816" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -256,7 +249,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/osqueue.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="835">
+        <state relative-caret-position="836">
           <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
         </state>
       </provider>
@@ -273,14 +266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/threadPool.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#141#149#0" />
-            <element signature="e#187#443#0" />
-            <element signature="e#515#800#0" />
-          </folding>
+        <state relative-caret-position="470">
+          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
         </state>
       </provider>
     </entry>
