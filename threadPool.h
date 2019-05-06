@@ -12,12 +12,12 @@ typedef struct synchronize {
 
 typedef struct thread_pool
 {
- //The field x is here because a struct without fields
- //doesn't compile. Remove it once you add fields of your own
  int x;
  OSQueue* tasksQueue;
  pthread_t* threads;
  Synchronize* sync;
+ bool canInsert;
+ bool canRun;
  //TODO - FILL THIS WITH YOUR FIELDS
 }ThreadPool;
 
