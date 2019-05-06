@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include "osqueue.h"
 
+typedef struct synchronize {
+    pthread_cond_t cond;
+    pthread_mutex_t mutex;
+} Synchronize;
+
 typedef struct thread_pool
 {
  //The field x is here because a struct without fields
@@ -12,16 +17,17 @@ typedef struct thread_pool
  int x;
  OSQueue* tasksQueue;
  pthread_t* threads;
- int* is_ocuppied;
- bool is_destroyed;
+ Synchronize* sync;
  //TODO - FILL THIS WITH YOUR FIELDS
 }ThreadPool;
 
 typedef struct thread_task
 {
-    void (* computeTask) (void*);
-    void* param;
+    void (*computeTask) (void*);
+    void* params;
 }ThreadTask;
+
+Synchronize* initSynchronize();
 
 ThreadPool* tpCreate(int numOfThreads);
 
