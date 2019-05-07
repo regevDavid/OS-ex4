@@ -15,6 +15,7 @@ Synchronize* initSynchronize() {
     Synchronize* sync = (Synchronize*)malloc(sizeof(Synchronize));
     pthread_cond_init(&sync->cond, NULL);
     pthread_mutex_init(&sync->mutex, NULL);
+    pthread_mutex_init(&sync->mutex1, NULL);
     return sync;
 }
 
@@ -49,26 +50,24 @@ void *funcToRun(void* arg) {
         pthread_mutex_lock(&tp->sync->mutex);
         // another check because it might be the occasion where canRun
         // changed to false while the thread didn't have CPU time
-        if (!tp->canRun) {
+        if (tp->canInsert == false && osIsQueueEmpty(tp->tasksQueue) == true) {
             pthread_mutex_unlock(&tp->sync->mutex);
             break;
         }
         // check if the queue is empty, if it is - put the thread on wait.
-        if (osIsQueueEmpty(tp->tasksQueue) && !tp->canInsert) {
+        if (osIsQueueEmpty(tp->tasksQueue) == true) {
             pthread_cond_wait(&tp->sync->cond, &tp->sync->mutex);
-        }else{
+        } else {
             ThreadTask *task;
             task = osDequeue(tp->tasksQueue);
             pthread_mutex_unlock(&tp->sync->mutex);
-            task->computeTask(task->params);
-            free(task);
-
+            if (task != NULL) {
+                ((task->computeTask))(task->params);
+                free(task);
+            }
         }
-
-        // if there is a task in the queue - dequeue and run it
-
     }
-    // TODO what to return.
+    pthread_exit(NULL);
 }
 
 ThreadPool* tpCreate(int numOfThreads) {
@@ -96,6 +95,7 @@ void tpDestroy(ThreadPool* threadPool, int shouldWaitForTasks) {
         threadPool->canRun = false;
         freeTasks(threadPool);
     }
+//    sleep(1);
     pthread_cond_broadcast(&threadPool->sync->cond);
     for (int i = 0; i < threadPool->x; ++i) {
         pthread_join(threadPool->threads[i], NULL);
@@ -119,7 +119,6 @@ int tpInsertTask(ThreadPool* threadPool, void (*computeFunc) (void *), void* par
     tk->computeTask = computeFunc;
     tk->params = param;
     osEnqueue(threadPool->tasksQueue, tk);
-    printf("I'm signal");
 //    sleep(1);
     pthread_cond_signal(&threadPool->sync->cond);
     pthread_mutex_unlock(&threadPool->sync->mutex);
