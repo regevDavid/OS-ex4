@@ -34,6 +34,11 @@ void freeTasks(ThreadPool* tp) {
     }
 }
 
+void freeSync(ThreadPool* tp) {
+    pthread_cond_destroy(&tp->sync->cond);
+    pthread_mutex_destroy(&tp->sync->mutex);
+}
+
 /*
  * The function that every thread will run
  * */
@@ -83,13 +88,19 @@ ThreadPool* tpCreate(int numOfThreads) {
 void tpDestroy(ThreadPool* threadPool, int shouldWaitForTasks) {
     threadPool->canInsert = false;
     if (shouldWaitForTasks == 0) {
-        threadPool->canRun = 0;
+        threadPool->canRun = false;
         freeTasks(threadPool);
     }
+    pthread_cond_broadcast(&threadPool->sync->cond);
+    for (int i = 0; i < threadPool->x; ++i) {
+        pthread_join(threadPool->threads[i], NULL);
+    }
+
+    // free resources
+    freeSync(threadPool);
     free(threadPool->sync);
-//     TODO check when the threads end to run.
-//    freeThreads(threadPool);
-//    osDestroyQueue(threadPool->tasksQueue);
+    free(threadPool->threads);
+    osDestroyQueue(threadPool->tasksQueue);
     free(threadPool);
 }
 
