@@ -8,7 +8,6 @@
 typedef struct synchronize {
     pthread_cond_t cond;
     pthread_mutex_t mutex;
-    pthread_mutex_t mutex1;
 } Synchronize;
 
 typedef struct thread_pool

@@ -15,7 +15,6 @@ Synchronize* initSynchronize() {
     Synchronize* sync = (Synchronize*)malloc(sizeof(Synchronize));
     pthread_cond_init(&sync->cond, NULL);
     pthread_mutex_init(&sync->mutex, NULL);
-    pthread_mutex_init(&sync->mutex1, NULL);
     return sync;
 }
 
@@ -90,14 +89,17 @@ ThreadPool* tpCreate(int numOfThreads) {
 }
 
 void tpDestroy(ThreadPool* threadPool, int shouldWaitForTasks) {
+    // evaluate the booleans
     threadPool->canInsert = false;
     if (shouldWaitForTasks == 0) {
         threadPool->canRun = false;
         freeTasks(threadPool);
     }
-//    sleep(1);
+
+    // wake up all the threads
     pthread_cond_broadcast(&threadPool->sync->cond);
     for (int i = 0; i < threadPool->x; ++i) {
+        // wait for all the threads to end running
         pthread_join(threadPool->threads[i], NULL);
     }
 

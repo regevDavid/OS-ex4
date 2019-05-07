@@ -8,6 +8,18 @@
 
 /home/davidregev/CLionProjects/Advanced Programming/ex4/osqueue.h
 
+/home/davidregev/CLionProjects/Advanced Programming/ex4/test.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+osqueue.h
+/home/davidregev/CLionProjects/Advanced Programming/ex4/osqueue.h
+threadPool.h
+/home/davidregev/CLionProjects/Advanced Programming/ex4/threadPool.h
+
 /home/davidregev/CLionProjects/Advanced Programming/ex4/threadPool.c
 malloc.h
 -
