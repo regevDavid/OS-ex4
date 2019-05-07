@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ex4.dir/main.c.o"
+  "CMakeFiles/ex4.dir/test.c.o"
   "CMakeFiles/ex4.dir/osqueue.c.o"
   "CMakeFiles/ex4.dir/threadPool.c.o"
   "ex4.pdb"

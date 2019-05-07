@@ -18,7 +18,6 @@ typedef struct thread_pool
  Synchronize* sync;
  bool canInsert;
  bool canRun;
- //TODO - FILL THIS WITH YOUR FIELDS
 }ThreadPool;
 
 typedef struct thread_task

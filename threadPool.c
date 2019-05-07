@@ -8,7 +8,7 @@
 
 
 pthread_t* initPthread(ThreadPool* tp, int numOfThreads);
-void *funcToRun(ThreadPool* tp);
+void *funcToRun(void* arg);
 
 
 Synchronize* initSynchronize() {
@@ -22,7 +22,7 @@ pthread_t* initPthread(ThreadPool* tp, int numOfThreads) {
     int i;
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t*) * numOfThreads);
     for (i = 0; i < numOfThreads; ++i) {
-        threads[i] = pthread_create(&threads[i], NULL, funcToRun(tp), NULL);
+        pthread_create(&threads[i], NULL, funcToRun, tp);
     }
     return threads;
 }
@@ -42,7 +42,8 @@ void freeSync(ThreadPool* tp) {
 /*
  * The function that every thread will run
  * */
-void *funcToRun(ThreadPool* tp) {
+void *funcToRun(void* arg) {
+    ThreadPool* tp = (ThreadPool*)arg;
     // lock the functionality of the thread
     while (tp->canRun) {
         pthread_mutex_lock(&tp->sync->mutex);
@@ -50,18 +51,22 @@ void *funcToRun(ThreadPool* tp) {
         // changed to false while the thread didn't have CPU time
         if (!tp->canRun) {
             pthread_mutex_unlock(&tp->sync->mutex);
+            break;
         }
         // check if the queue is empty, if it is - put the thread on wait.
-        while (osIsQueueEmpty(tp->tasksQueue)) {
+        if (osIsQueueEmpty(tp->tasksQueue) && !tp->canInsert) {
             pthread_cond_wait(&tp->sync->cond, &tp->sync->mutex);
+        }else{
+            ThreadTask *task;
+            task = osDequeue(tp->tasksQueue);
+            pthread_mutex_unlock(&tp->sync->mutex);
+            task->computeTask(task->params);
+            free(task);
+
         }
 
         // if there is a task in the queue - dequeue and run it
-        ThreadTask *task;
-        task = osDequeue(tp->tasksQueue);
-        task->computeTask(task->params);
-        free(task);
-        pthread_mutex_unlock(&tp->sync->mutex);
+
     }
     // TODO what to return.
 }
@@ -79,9 +84,9 @@ ThreadPool* tpCreate(int numOfThreads) {
     // initializations of the structs
     tp->tasksQueue = osCreateQueue();
     tp->sync = initSynchronize();
-    tp->threads = initPthread(tp, numOfThreads);
     tp->canInsert = true;
     tp->canRun = true;
+    tp->threads = initPthread(tp, numOfThreads);
     return tp;
 }
 
@@ -106,7 +111,7 @@ void tpDestroy(ThreadPool* threadPool, int shouldWaitForTasks) {
 
 
 int tpInsertTask(ThreadPool* threadPool, void (*computeFunc) (void *), void* param) {
-    if (threadPool->canInsert) {
+    if (!threadPool->canInsert) {
         return 0;
     }
     pthread_mutex_lock(&threadPool->sync->mutex);
@@ -114,6 +119,8 @@ int tpInsertTask(ThreadPool* threadPool, void (*computeFunc) (void *), void* par
     tk->computeTask = computeFunc;
     tk->params = param;
     osEnqueue(threadPool->tasksQueue, tk);
+    printf("I'm signal");
+//    sleep(1);
     pthread_cond_signal(&threadPool->sync->cond);
     pthread_mutex_unlock(&threadPool->sync->mutex);
     return 1;

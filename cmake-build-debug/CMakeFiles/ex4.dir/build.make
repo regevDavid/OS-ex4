@@ -57,18 +57,18 @@ include CMakeFiles/ex4.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ex4.dir/flags.make
 
-CMakeFiles/ex4.dir/main.c.o: CMakeFiles/ex4.dir/flags.make
-CMakeFiles/ex4.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/davidregev/CLionProjects/Advanced Programming/ex4/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ex4.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ex4.dir/main.c.o   -c "/home/davidregev/CLionProjects/Advanced Programming/ex4/main.c"
+CMakeFiles/ex4.dir/test.c.o: CMakeFiles/ex4.dir/flags.make
+CMakeFiles/ex4.dir/test.c.o: ../test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/davidregev/CLionProjects/Advanced Programming/ex4/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ex4.dir/test.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ex4.dir/test.c.o   -c "/home/davidregev/CLionProjects/Advanced Programming/ex4/test.c"
 
-CMakeFiles/ex4.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ex4.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/davidregev/CLionProjects/Advanced Programming/ex4/main.c" > CMakeFiles/ex4.dir/main.c.i
+CMakeFiles/ex4.dir/test.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ex4.dir/test.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/davidregev/CLionProjects/Advanced Programming/ex4/test.c" > CMakeFiles/ex4.dir/test.c.i
 
-CMakeFiles/ex4.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ex4.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/davidregev/CLionProjects/Advanced Programming/ex4/main.c" -o CMakeFiles/ex4.dir/main.c.s
+CMakeFiles/ex4.dir/test.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ex4.dir/test.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/davidregev/CLionProjects/Advanced Programming/ex4/test.c" -o CMakeFiles/ex4.dir/test.c.s
 
 CMakeFiles/ex4.dir/osqueue.c.o: CMakeFiles/ex4.dir/flags.make
 CMakeFiles/ex4.dir/osqueue.c.o: ../osqueue.c
@@ -98,14 +98,14 @@ CMakeFiles/ex4.dir/threadPool.c.s: cmake_force
 
 # Object files for target ex4
 ex4_OBJECTS = \
-"CMakeFiles/ex4.dir/main.c.o" \
+"CMakeFiles/ex4.dir/test.c.o" \
 "CMakeFiles/ex4.dir/osqueue.c.o" \
 "CMakeFiles/ex4.dir/threadPool.c.o"
 
 # External object files for target ex4
 ex4_EXTERNAL_OBJECTS =
 
-ex4: CMakeFiles/ex4.dir/main.c.o
+ex4: CMakeFiles/ex4.dir/test.c.o
 ex4: CMakeFiles/ex4.dir/osqueue.c.o
 ex4: CMakeFiles/ex4.dir/threadPool.c.o
 ex4: CMakeFiles/ex4.dir/build.make
